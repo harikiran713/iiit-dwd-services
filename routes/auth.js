@@ -6,11 +6,11 @@ const config = require('../config');
 
 // Hardcoded users for each service
 const predefinedUsers = [
-  { email: 'canteen@college.edu', password: 'canteen123', serviceType: 'canteen' },
-  { email: 'laundry@college.edu', password: 'laundry123', serviceType: 'laundromat' },
-  { email: 'medical@college.edu', password: 'medical123', serviceType: 'medical' },
-  { email: 'store@college.edu', password: 'store123', serviceType: 'store' },
-  { email: 'milk@college.edu', password: 'milk123', serviceType: 'milk' }
+  { email: 'canteen@iiitdwd.ac.in', password: '123456', serviceType: 'canteen' },
+  { email: 'laundry@iiitdwd.ac.in', password: '123456', serviceType: 'laundromat' },
+  { email: 'medical@iiitdwd.ac.in', password: '123456', serviceType: 'medical' },
+  { email: 'store@iiitdwd.ac.in', password: '123456', serviceType: 'store' },
+  { email: 'milk@iiitdwd.ac.in', password: '123456', serviceType: 'milk' }
 ];
 
 // Initialize users if they don't exist
