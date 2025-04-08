@@ -28,26 +28,54 @@ router.post('/init', async (req, res) => {
   }
 });
 
-// Login route
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
+
+  // Validate input
+  if (!email || !password) {
+    return res.status(400).json({ 
+      success: false,
+      message: 'Email and password are required' 
+    });
+  }
 
   try {
     const user = await User.findOne({ email });
     
     if (!user || user.password !== password) {
-      return res.status(401).json({ message: 'Invalid credentials' });
+      return res.status(401).json({ 
+        success: false,
+        message: 'Invalid credentials' 
+      });
     }
 
     const token = jwt.sign(
-      { userId: user._id, serviceType: user.serviceType },
+      { 
+        userId: user._id, 
+        serviceType: user.serviceType 
+      },
       config.JWT_SECRET,
       { expiresIn: '1h' }
     );
 
-    res.status(200).json({ token, serviceType: user.serviceType });
+    // Return consistent response structure
+    res.status(200).json({ 
+      success: true,
+      token,
+      serviceType: user.serviceType,
+      user: {
+        id: user._id,
+        email: user.email,
+        name: user.name
+      }
+    });
+
   } catch (error) {
-    res.status(500).json({ message: 'Login failed' });
+    console.error('Login error:', error);
+    res.status(500).json({ 
+      success: false,
+      message: 'Internal server error' 
+    });
   }
 });
 
